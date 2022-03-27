@@ -1,5 +1,4 @@
 from robot import Robot
-from weapon import Weapon
 
 class Fleet:
     def __init__(self):
@@ -7,9 +6,9 @@ class Fleet:
         
         
     def create_fleet(self):
-        self.robot1 = Robot("Voltron", 100, 70)
-        self.robot2 = Robot("Optimus Prime", 85, 85)
-        self.robot3 = Robot("Astro Boy", 70, 100)
+        self.robot1 = Robot("Voltron")
+        self.robot2 = Robot("Optimus Prime")
+        self.robot3 = Robot("Astro Boy")
         
         self.robots.append(self.robot1)
         self.robots.append(self.robot2)
