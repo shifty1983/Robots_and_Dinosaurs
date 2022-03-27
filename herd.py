@@ -1,10 +1,10 @@
 from dinosaur import Dinosaur
 
-class Fleet:
+class Herd:
     def __init__(self):
         self.dinosaurs = []  
         
-    def create_fleet(self):
+    def create_herd(self):
         self.dinosaur1 = Dinosaur("Godzilla",70)
         self.dinosaur2 = Dinosaur("Blue", 85)
         self.dinosaur3 = Dinosaur("Rex", 70)
@@ -13,10 +13,9 @@ class Fleet:
         self.dinosaurs.append(self.dinosaur2)
         self.dinosaurs.append(self.dinosaur3)
 
-    def herd_dinosaurs(self):
+    def current_herd(self):
+        print ("Current Dinosaur Herd:")
+        i = 0
         for dinosaur in self.dinosaurs:
-            print(dinosaur.name)
-   
-herd = Fleet()
-herd.create_fleet()
-herd.herd_dinosaurs()
+            print(f'Press {i} to select {dinosaur.name} (health {dinosaur.health}, energy {dinosaur.energy})')
+            i += 1

@@ -17,8 +17,9 @@ class Robot:
         i = 0
         for weapon in Robot.weapon_list:
             print(f'Press {i} to use {weapon.name} (attack power {weapon.attack_power})')
-
-        weapon_selection = int(input('Select weapon to use '))
+            i += 1
+            
+        weapon_selection = int(input('Select weapon to use: '))
         if weapon_selection == 0:
             self.weapon = Robot.weapon1
         elif weapon_selection == 1:

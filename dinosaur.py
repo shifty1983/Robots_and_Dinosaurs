@@ -12,8 +12,9 @@ class Dinosaur:
         i = 0
         for attack in attack_tuple:
             print(f'Press {i} to use {attack}')
-
-        attack_selection = int(input('Select attack to use '))
+            i += 1
+        
+        attack_selection = int(input('Select attack to use: '))
         if attack_selection == 0:
             attack = 'Bite'
         elif attack_selection == 1:

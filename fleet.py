@@ -13,13 +13,10 @@ class Fleet:
         self.robots.append(self.robot1)
         self.robots.append(self.robot2)
         self.robots.append(self.robot3)
-
-    def fleet_robots(self):
+    
+    def current_fleet(self):
+        print ("Current Robot Fleet:")
+        i = 0
         for robot in self.robots:
-            print(robot.name)
-   
-fleet = Fleet()
-fleet.create_fleet()
-fleet.fleet_robots()
-
-
+            print(f'Press {i} to select {robot.name} (health {robot.health}, power {robot.power})')
+            i += 1
