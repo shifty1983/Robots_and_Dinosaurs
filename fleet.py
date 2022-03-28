@@ -20,3 +20,4 @@ class Fleet:
         for robot in self.robots:
             print(f'Press {i} to select {robot.name} (health {robot.health}, power {robot.power})')
             i += 1
+
