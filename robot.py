@@ -8,7 +8,7 @@ class Robot:
     weapon_list = [weapon1, weapon2, weapon3]
     def __init__(self, name):
         self.name = name
-        self.health = 100
+        self.health = 80
         self.power = 50
         
     def attack(self, dinosaur):
