@@ -3,7 +3,7 @@ class Dinosaur:
         self.name = name
         self.attack_power = attack_power
         self.health = 100
-        self.energy = 50
+        self.energy = 30
         
     def attack(self, robot):
         attack_tuple =('Bite', 'Stomp','Slash')

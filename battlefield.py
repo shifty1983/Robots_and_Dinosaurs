@@ -24,23 +24,25 @@ class Battlefield:
             turn = random.randint(1, 2)
             if turn == 1:
                 self.robo_turn()
-            else:
+            elif turn == 2:
                 self.dino_turn()
             
-            self.display_winner()
+            if len(self.fleet.robots) == 0 or len(self.herd.dinosaurs) == 0:
+                self.display_winner()
+                battle = False
 
     def dino_turn(self):
-        self.herd.current_herd()
+        self.show_dino_attacking_options()
         
         dinosaur_choice = int(input("Select dinosaur to attack with: "))
         if dinosaur_choice == 0:
-            self.attacking_dinosaur = self.herd.dinosaurs[0]
+            self.attacking_dinosaur = self.herd.attacking_dinosaurs[0]
         elif dinosaur_choice == 1:
-            self.attacking_dinosaur = self.herd.dinosaurs[1]
+            self.attacking_dinosaur = self.herd.attacking_dinosaurs[1]
         else:
-            self.attacking_dinosaur = self.herd.dinosaurs[2]
+            self.attacking_dinosaur = self.herd.attacking_dinosaurs[2]
 
-        self.show_robo_opponent_options()
+        self.show_dino_opponent_options()
 
         robot_choice = int(input("Select robot to attack: "))
         if robot_choice == 0:
@@ -54,21 +56,27 @@ class Battlefield:
         
         self.attacking_dinosaur.energy -= 10
 
-        if self.attacked_robot.health <=0:
+        if self.attacked_robot.health <= 0:
             self.fleet.robots.remove(self.attacked_robot)
+        
+        if self.attacked_robot.health <=0 and self.attacked_robot in self.fleet.attacking_robots:
+            self.fleet.attacking_robots.remove(self.attacked_robot)
+            
+        if self.attacking_dinosaur.energy <= 0:
+            self.herd.attacking_dinosaurs.remove(self.attacking_dinosaur)
 
     def robo_turn(self):
-        self.fleet.current_fleet()
+        self.show_robo_attacking_options()
 
         robot_choice = int(input("Select robot to attack with: "))
         if robot_choice == 0:
-            self.attacking_robot = self.fleet.robots[0]
+            self.attacking_robot = self.fleet.attacking_robots[0]
         elif robot_choice == 1:
-            self.attacking_robot = self.fleet.robots[1]
+            self.attacking_robot = self.fleet.attacking_robots[1]
         else:
-            self.attacking_robot = self.fleet.robots[2]
+            self.attacking_robot = self.fleet.attacking_robots[2]
 
-        self.show_dino_opponent_options()
+        self.show_robo_opponent_options()
 
         dino_choice = int(input("Select dinosaur to attack: "))
         if dino_choice == 0:
@@ -76,29 +84,40 @@ class Battlefield:
         elif dino_choice == 1:
             self.attacked_dino = self.herd.dinosaurs[1]
         else:
-            self.attacked_dino = self.herd.dinosaurs[20]
+            self.attacked_dino = self.herd.dinosaurs[2]
 
         self.attacking_robot.attack(self.attacked_dino)
         
         self.attacking_robot.power -= 10
 
-        if self.attacked_dino.health <=0:
-            self.herd.dinosaurs.remove(self.attacked_dino)
+        if self.attacked_dino.health <=0 :
+            self.herd.dinosaurs.remove(self.attacked_dino)  
+            
+        if self.attacked_dino.health <= 0 and self.attacked_dino in self.herd.attacking_dinosaurs:
+            self.herd.attacking_dinosaurs.remove(self.attacked_dino)  
+        
+        if self.attacking_robot.power <= 0:
+            self.fleet.attacking_robots.remove(self.attacking_robot)
         
     def show_dino_opponent_options(self):
         self.fleet.current_fleet()
+    
+    def show_dino_attacking_options(self):
+        self.herd.attacking_herd()
 
     def show_robo_opponent_options(self):
         self.herd.current_herd()
+    
+    def show_robo_attacking_options(self):
+        self.fleet.attacking_fleet()
         
 
     def display_winner(self):
         if len(self.fleet.robots) == 0:
             print ("The Dinosaurs have destroyed the Robots and are victorious")
-            battle = False
+            
         elif len(self.herd.dinosaurs) == 0:
             print ("The Dinosaurs have destroyed the Robots and are victorious")
-            battle = False
 
 battlefield = Battlefield()
 battlefield.run_game()  
